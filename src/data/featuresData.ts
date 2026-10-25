@@ -1,0 +1,175 @@
+import { FeatureItem } from '../types';
+
+export const FEATURES_DATA: FeatureItem[] = [
+  // Editing
+  {
+    id: 'syntax-highlight',
+    title: 'Fast Syntax Highlighting',
+    category: 'editing',
+    description: 'Instant lexical highlighting for 50+ programming languages with zero delay, even on large files.',
+    detail: 'Powered by native Treesitter grammars running in AppKit without WebViews or Electron overhead. Supports Rust, Swift, Go, Python, TypeScript, C/C++, JSON, YAML, SQL, Shell, Markdown, and more.',
+    isAvailable: true,
+    highlight: 'Treesitter Grammars',
+  },
+  {
+    id: 'multi-tab',
+    title: 'Multi-Tab Document Workspace',
+    category: 'editing',
+    description: 'Effortless tab management with tear-off tabs, tab pinning, and instant document switching.',
+    detail: 'Native macOS tab bar behavior with smooth drag-and-drop reordering. Supports dirty document indicators (red circle on unsaved files) matching Notepad++ conventions.',
+    isAvailable: true,
+    shortcut: '⌘W / ⌘T',
+  },
+  {
+    id: 'split-view',
+    title: 'Split-View Dual Editing',
+    category: 'editing',
+    description: 'Edit two files side-by-side or clone the same document into two viewports for comparative editing.',
+    detail: 'Synchronized vertical or horizontal split view. Allows inspecting header definitions while editing implementation, or viewing before/after diffs in real time.',
+    isAvailable: true,
+    shortcut: '⌘⌥D',
+  },
+  {
+    id: 'column-select',
+    title: 'Column / Block Selection',
+    category: 'editing',
+    description: 'Rectangular block selection for multi-line editing, column alignment, and bulk indentation.',
+    detail: 'Hold Option (⌥) while dragging the mouse or use ⌥⇧ + Arrow keys to create precise rectangular cursors across multiple lines simultaneously.',
+    isAvailable: true,
+    shortcut: '⌥ + Drag',
+  },
+  {
+    id: 'line-operations',
+    title: 'Line Duplication & Transposition',
+    category: 'editing',
+    description: 'Instant line duplicate, line delete, line move up/down, and alphabetical line sorting.',
+    detail: 'Press ⌘D to duplicate the current line or selection. Move lines up and down effortlessly with ⌥↑ / ⌥↓ without touching the clipboard.',
+    isAvailable: true,
+    shortcut: '⌘D / ⌘⇧K',
+  },
+
+  // Search & Replace
+  {
+    id: 'regex-search',
+    title: 'Powerful PCRE Regex Find & Replace',
+    category: 'search',
+    description: 'Full regular expression engine with lookahead, lookbehind, capture groups, and backreferences.',
+    detail: 'Supports standard PCRE syntax, case matching, whole-word search, and wrap-around searching. Displays live match count and highlighted matches instantly.',
+    isAvailable: true,
+    shortcut: '⌘F / ⌘H',
+  },
+  {
+    id: 'find-in-files',
+    title: 'Find in Directory / Project Files',
+    category: 'search',
+    description: 'Search text and patterns across all files in a folder with include/exclude glob masks.',
+    detail: 'Multi-threaded disk traversal that searches thousands of source files in seconds. Results open in a dedicated docking drawer with one-click navigation to the exact line.',
+    isAvailable: true,
+    shortcut: '⌘⇧F',
+  },
+  {
+    id: 'mark-all',
+    title: 'Mark All Occurrences & Bookmarking',
+    category: 'search',
+    description: 'Bookmark lines matching search patterns and jump between bookmarks with ease.',
+    detail: 'Toggle bookmarks on any line with ⌘F2. Cycle through active bookmarks with F2 / ⇧F2 or copy all bookmarked lines to a new tab.',
+    isAvailable: true,
+    shortcut: '⌘F2 / F2',
+  },
+
+  // Languages & Code
+  {
+    id: 'language-detection',
+    title: 'Automatic Language & Encoding Detection',
+    category: 'languages',
+    description: 'Auto-detects file types, UTF-8/UTF-16/ASCII character encodings, and LF / CRLF line endings.',
+    detail: 'Inspect and convert line endings between Unix (LF), Windows (CRLF), and legacy Mac (CR) with a single click from the native status bar.',
+    isAvailable: true,
+    highlight: 'UTF-8 / CRLF to LF',
+  },
+  {
+    id: 'code-folding',
+    title: 'Hierarchical Code Folding',
+    category: 'languages',
+    description: 'Collapse and expand functions, classes, conditionals, and markdown sections.',
+    detail: 'Gutter indicators with quick collapse shortcuts. Fold all levels or collapse matching brackets with keyboard shortcuts.',
+    isAvailable: true,
+    shortcut: '⌘⌥[ / ⌘⌥]',
+  },
+  {
+    id: 'custom-udl',
+    title: 'User-Defined Language (UDL) System',
+    category: 'languages',
+    description: 'Define custom keywords, operators, delimiters, and commenting rules for proprietary file formats.',
+    detail: 'Import and export custom XML language definitions compatible with classic Notepad++ UDL format.',
+    isAvailable: false, // Planned in v1.1 roadmap
+    highlight: 'Roadmap v1.1',
+  },
+
+  // Productivity
+  {
+    id: 'terminal-open',
+    title: 'Open Terminal in File Directory',
+    category: 'productivity',
+    description: 'Launch Terminal, iTerm2, or Ghostty directly in the current file\'s parent folder.',
+    detail: 'Trigger with a single keyboard shortcut or toolbar button. Seamlessly bridges your GUI text editor with command-line builds and Git workflows.',
+    isAvailable: true,
+    shortcut: '⌘⌥T',
+  },
+  {
+    id: 'run-script',
+    title: 'Quick Program Execution',
+    category: 'productivity',
+    description: 'Execute Python, Node.js, Shell, Swift, or Ruby scripts directly from the editor.',
+    detail: 'Configurable build commands with variable expansion ($(FILE_PATH), $(DIR_PATH)). Output streams directly into a bottom console drawer.',
+    isAvailable: true,
+    shortcut: '⌘R',
+  },
+  {
+    id: 'session-recovery',
+    title: 'Unsaved Document Auto-Recovery',
+    category: 'productivity',
+    description: 'Never lose a thought: temporary untitled files and unsaved modifications survive app restarts.',
+    detail: 'Snapshot journaling continuously saves buffer states in ~/Library/Application Support/NPad++/Backups. When reopening, all open tabs and cursor positions restore automatically.',
+    isAvailable: true,
+    highlight: 'Zero Data Loss',
+  },
+  {
+    id: 'hex-viewer',
+    title: 'Integrated Hex & Binary Inspector',
+    category: 'productivity',
+    description: 'Inspect binary files, firmware blobs, and raw byte encodings with side-by-side hex representation.',
+    detail: 'Allows analyzing non-text assets and binary artifacts without third-party utilities.',
+    isAvailable: false, // Planned in v1.2 roadmap
+    highlight: 'Roadmap v1.2',
+  },
+
+  // macOS Native
+  {
+    id: 'apple-silicon',
+    title: 'Apple Silicon Native (All M Chips)',
+    category: 'macos',
+    description: 'Compiled directly for all Apple M-series chips (M1, M2, M3, M4, M5, M6, Pro, Max & Ultra) for sub-100ms launch times and zero emulation overhead.',
+    detail: 'Pure AppKit and Swift 6 binary with virtually zero idle battery draw. Runs at peak native performance on all M1 through M6 Apple Silicon Macs with under 35 MB of RAM.',
+    isAvailable: true,
+    highlight: 'All M Chips (M1–M6)',
+  },
+  {
+    id: 'macos-integration',
+    title: 'Full macOS System Integration',
+    category: 'macos',
+    description: 'Supports macOS Dark Mode, Quick Look previews, Spotlight indexing, and macOS Services.',
+    detail: 'Respects system accent colors, native window vibrancy, AppKit menu items, and drag-and-drop to and from Finder or Dock.',
+    isAvailable: true,
+    highlight: 'Native AppKit',
+  },
+  {
+    id: 'plugin-api',
+    title: 'Native Swift Plugin Architecture',
+    category: 'macos',
+    description: 'Extensible plugin architecture for custom formatting tools, linters, and themes.',
+    detail: 'Sandboxed native bundles with event hooks for buffer changes, editor actions, and status updates.',
+    isAvailable: false, // Planned in v1.2 roadmap
+    highlight: 'Roadmap v1.2',
+  },
+];

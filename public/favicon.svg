@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#0F172A"/>
+  <!-- Chameleon Body stylized in green & white -->
+  <path d="M18 36C18 24.9543 26.9543 16 38 16C44.6274 16 50.4853 19.2132 54 24.1611C53.2 24.05 52.3 24 51.4 24C45.1036 24 40 29.1036 40 35.4V36H18Z" fill="#10B981"/>
+  <!-- Eye -->
+  <circle cx="45" cy="22" r="4.5" fill="#FFFFFF"/>
+  <circle cx="46" cy="21.5" r="2" fill="#0F172A"/>
+  <circle cx="47" cy="21" r="0.8" fill="#FFFFFF"/>
+  <!-- Crest/Ridge details -->
+  <path d="M30 16L32 13L34 16" stroke="#34D399" stroke-width="2" stroke-linecap="round"/>
+  <path d="M36 16L38 12L40 16" stroke="#34D399" stroke-width="2" stroke-linecap="round"/>
+  <path d="M42 17L44 14L46 18" stroke="#34D399" stroke-width="2" stroke-linecap="round"/>
+  <!-- Curled Tail -->
+  <path d="M18 36C15 36 11 38 11 43C11 47 15 49 19 49C22 49 24 47 24 44.5C24 42 22 41 20 41C18.5 41 17.5 42 17.5 43.2" stroke="#10B981" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <!-- Branch -->
+  <path d="M8 46H56" stroke="#334155" stroke-width="3" stroke-linecap="round"/>
+  <!-- Claws -->
+  <path d="M36 36V46" stroke="#059669" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M26 36V46" stroke="#059669" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Plus plus badges -->
+  <text x="41" y="44" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="900" fill="#34D399">++</text>
+</svg>
