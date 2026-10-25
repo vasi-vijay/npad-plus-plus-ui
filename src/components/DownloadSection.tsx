@@ -5,7 +5,12 @@ import {
   Download,
   CheckCircle2,
   Cpu,
-  Layers
+  Layers,
+  ShieldAlert,
+  Terminal,
+  Info,
+  Copy,
+  Check
 } from 'lucide-react';
 
 interface DownloadSectionProps {
@@ -19,9 +24,23 @@ export const DownloadSection: React.FC<DownloadSectionProps> = ({
 }) => {
   const [selectedArch, setSelectedArch] = useState<Architecture>('arm64');
   const [downloadStarted, setDownloadStarted] = useState(false);
+  const [copiedDmgQuarantine, setCopiedDmgQuarantine] = useState(false);
+  const [copiedAppQuarantine, setCopiedAppQuarantine] = useState(false);
 
   const activeAsset = CURRENT_RELEASE.assets[selectedArch];
   const effectiveDownloadUrl = activeAsset.downloadUrl || `/downloads/${activeAsset.filename}`;
+
+  const handleCopyDmgQuarantine = () => {
+    navigator.clipboard.writeText('xattr -d com.apple.quarantine ~/Downloads/"NPad++.dmg"');
+    setCopiedDmgQuarantine(true);
+    setTimeout(() => setCopiedDmgQuarantine(false), 2000);
+  };
+
+  const handleCopyAppQuarantine = () => {
+    navigator.clipboard.writeText('xattr -cr /Applications/NPad++.app');
+    setCopiedAppQuarantine(true);
+    setTimeout(() => setCopiedAppQuarantine(false), 2000);
+  };
 
   const handleDownloadClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     // Analytics telemetry payload measuring user intent and chosen architecture
@@ -161,6 +180,89 @@ export const DownloadSection: React.FC<DownloadSectionProps> = ({
             <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">
               Direct macOS disk image installer • {activeAsset.sizeHuman} • Native AppKit
             </p>
+          </div>
+
+          {/* macOS Gatekeeper Alert Notice & One-Line Terminal Command */}
+          <div className="mb-8 p-5 sm:p-6 rounded-2xl bg-amber-50/90 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 text-left space-y-4 shadow-sm">
+            <div className="flex items-start gap-3">
+              <div className="p-2 rounded-xl bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300 shrink-0">
+                <ShieldAlert className="w-5 h-5" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h4 className="text-sm font-bold text-amber-900 dark:text-amber-200">
+                    macOS Gatekeeper Alert? Quick Fix
+                  </h4>
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-200/80 dark:bg-amber-900 text-amber-900 dark:text-amber-200">
+                    Normal Behavior
+                  </span>
+                </div>
+                <p className="mt-1 text-xs text-amber-800/90 dark:text-amber-300/90 leading-relaxed">
+                  This alert is caused by macOS Gatekeeper. It is completely normal for apps downloaded from the internet that are not distributed through the Mac App Store.
+                </p>
+              </div>
+            </div>
+
+            {/* Why Does This Happen? */}
+            <div className="p-4 rounded-xl bg-white/90 dark:bg-slate-900/90 border border-amber-200/70 dark:border-amber-900/40 text-xs space-y-2">
+              <div className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                <Info className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
+                <span>Why Does This Happen?</span>
+              </div>
+              <p className="leading-relaxed text-slate-600 dark:text-slate-300">
+                Whenever any file is downloaded through a web browser (Chrome, Safari), macOS automatically attaches an extended quarantine attribute (<code className="font-mono bg-amber-100/70 dark:bg-amber-950/60 px-1 py-0.5 rounded text-amber-900 dark:text-amber-300 font-semibold">com.apple.quarantine</code>) to the file.
+              </p>
+              <p className="leading-relaxed text-slate-600 dark:text-slate-300">
+                Because NPad++ is an independent open-source application signed with an ad-hoc signature (rather than an Apple Developer ID Certificate ($99/year) that has been notarized by Apple's servers), Gatekeeper blocks opening it via a standard double-click.
+              </p>
+            </div>
+
+            {/* One-Line Terminal Command */}
+            <div className="space-y-3 pt-1">
+              <div>
+                <div className="text-xs font-semibold text-slate-900 dark:text-white mb-1.5 flex items-center gap-1.5">
+                  <Terminal className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                  <span>One-Line Terminal Command (Remove Quarantine):</span>
+                </div>
+                <p className="text-[11px] text-slate-600 dark:text-slate-400 mb-1.5">
+                  If you prefer the terminal, you can remove the browser quarantine attribute with a single command:
+                </p>
+                <div className="p-3 rounded-xl bg-slate-950 text-slate-200 font-mono text-xs flex items-center justify-between gap-3 border border-slate-800 shadow-inner">
+                  <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap">
+                    <span className="text-slate-500 select-none">$</span>
+                    <span className="text-emerald-400 select-all">xattr -d com.apple.quarantine ~/Downloads/&quot;NPad++.dmg&quot;</span>
+                  </div>
+                  <button
+                    onClick={handleCopyDmgQuarantine}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-semibold transition-colors shrink-0"
+                    title="Copy command"
+                  >
+                    {copiedDmgQuarantine ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedDmgQuarantine ? 'Copied' : 'Copy'}</span>
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <div className="text-[11px] text-slate-600 dark:text-slate-400 mb-1.5">
+                  Once installed into <code className="font-mono bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-slate-800 dark:text-slate-200 font-semibold">/Applications</code>, if Gatekeeper ever prompts when launching the app:
+                </div>
+                <div className="p-3 rounded-xl bg-slate-950 text-slate-200 font-mono text-xs flex items-center justify-between gap-3 border border-slate-800 shadow-inner">
+                  <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap">
+                    <span className="text-slate-500 select-none">$</span>
+                    <span className="text-emerald-400 select-all">xattr -cr /Applications/NPad++.app</span>
+                  </div>
+                  <button
+                    onClick={handleCopyAppQuarantine}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-semibold transition-colors shrink-0"
+                    title="Copy command"
+                  >
+                    {copiedAppQuarantine ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedAppQuarantine ? 'Copied' : 'Copy'}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Clean 2-Step Drag-and-Drop Installation Guide */}
