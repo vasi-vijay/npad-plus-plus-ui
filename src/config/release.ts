@@ -35,9 +35,9 @@ export const CURRENT_RELEASE: ReleaseMetadata = {
       filename: 'NPad++.dmg',
       localPath: '/public/downloads/NPad++.dmg',
       downloadUrl: envDownloadUrlArm64,
-      sizeBytes: 3368616, // ~3.3 MB native DMG
+      sizeBytes: 3369076, // ~3.3 MB native DMG
       sizeHuman: '3.3 MB',
-      sha256: '6f8f38fba0a853a446d8dd39c3e8de7e8a656fda00aa7b80f6108c1709676ea5',
+      sha256: '56e883d0afa9d9e212225f4acc504ca2c55a3f71f9a03e81935846367c06b079',
       isRecommended: true,
     },
     x86_64: {
